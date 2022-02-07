@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyUploader", "PolicyUploader.csproj", "{00DBE1D7-C7C9-4FAF-B3D8-3196FA8FD52E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00DBE1D7-C7C9-4FAF-B3D8-3196FA8FD52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00DBE1D7-C7C9-4FAF-B3D8-3196FA8FD52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00DBE1D7-C7C9-4FAF-B3D8-3196FA8FD52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00DBE1D7-C7C9-4FAF-B3D8-3196FA8FD52E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73954FCB-BF04-463C-902A-8FFE5443496F}
+	EndGlobalSection
+EndGlobal

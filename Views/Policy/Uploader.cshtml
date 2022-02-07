@@ -1,0 +1,72 @@
+﻿@using System.Web.Configuration;
+@model PolicyUploader.Models.ViewModels.PolicyUploadViewModel
+@{
+    ViewBag.Title = "Policy Uploader";
+}
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("Upload", "Policy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <form>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.PolicyFile)
+                @Html.TextBoxFor(model => model.PolicyFile, new { type = "file", @class = "form-control-file", accept = WebConfigurationManager.AppSettings["PolicyFileExtension"].ToString() })
+                @Html.ValidationMessageFor(model => model.PolicyFile, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidFile", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                <input type="submit" class="btn btn-primary" id="btnSubmit" value="Submit" />
+                <input type="button" class="btn btn-primary" id="btnValidate" value="Validate" />
+            </div>
+        </form>
+    }
+
+    @if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                Policy Details
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">Policy No.</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Email ID</th>
+                    <th scope="col">Validation Message</th>
+                </tr>
+                <tr id="policyDetailRow">
+                    <td>@Model.Policy.PolicyNo</td>
+                    <td>@Model.Policy.Phone</td>
+                    <td>@Model.Policy.EmailID</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#btnValidate").click(function () {
+            debugger;
+            $("#policyDetailRow").children("td").get(3).innerHTML = "";
+            var htmlValidateMsg = "";
+            var policyNum = $("#policyDetailRow").children("td").get(0).innerText;
+            var contact = $("#policyDetailRow").children("td").get(1).innerText;
+            var emailId = $("#policyDetailRow").children("td").get(2).innerText;
+            var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+
+            if (policyNum == null || policyNum.length != 9)
+                htmlValidateMsg += "<b class='text-danger'>Invalid Policy Number</b><br/>";
+            if (contact == null || Number.isInteger(contact) || contact.length != 10)
+                htmlValidateMsg += "<b class='text-danger'>Invalid Telephone Number</b><br/>";
+            if (emailId == null || !emailReg.test(emailId))
+                htmlValidateMsg += "<b class='text-danger'>Invalid Email Id</b><br/>";
+            if (htmlValidateMsg == "")
+                htmlValidateMsg += "<b class='text-success'>Valid</b>";
+
+            $("#policyDetailRow").children("td").get(3).innerHTML = htmlValidateMsg;
+        });
+    </script>
+}
