@@ -10,7 +10,7 @@
         <form>
             <div class="form-group row">
                 @Html.LabelFor(model => model.PolicyFile)
-                @Html.TextBoxFor(model => model.PolicyFile, new { type = "file", @class = "form-control-file", accept = WebConfigurationManager.AppSettings["PolicyFileExtension"].ToString() })
+                @Html.TextBoxFor(model => model.PolicyFile, new { type = "file", @class = "form-control-file", accept = WebConfigurationManager.AppSettings["PolicyFileExtension"].ToString(), id="policyFileUpload" })
                 @Html.ValidationMessageFor(model => model.PolicyFile, "", new { @class = "text-danger" })
                 @Html.ValidationMessage("InvalidFile", new { @class = "text-danger" })
             </div>
@@ -23,7 +23,7 @@
 
     @if (Model != null)
     {
-        <table class="table">
+        <table class="table" id="tblPolicy">
             <thead>
                 Policy Details
             </thead>
@@ -49,7 +49,11 @@
 {
     <script type="text/javascript">
         $("#btnValidate").click(function () {
-            debugger;
+            var policyDtl = $("#tblPolicy").val();
+            if (policyDtl == undefined || policyDtl == null) {
+                alert("Please select a file to validate.");
+                return;
+            }
             $("#policyDetailRow").children("td").get(3).innerHTML = "";
             var htmlValidateMsg = "";
             var policyNum = $("#policyDetailRow").children("td").get(0).innerText;
